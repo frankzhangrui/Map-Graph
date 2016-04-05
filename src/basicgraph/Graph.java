@@ -1,6 +1,7 @@
 package basicgraph;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -122,7 +123,13 @@ public abstract class Graph {
 	 */
 	public List<Integer> degreeSequence() {
 		// XXX: Implement in part 1 of week 1
-		return null;
+		List<Integer> rst = new ArrayList<Integer>();
+		for (int i=0; i<numVertices; ++i) {
+			int degree = getNeighbors(i).size() + this.getInNeighbors(i).size();
+			rst.add(degree);
+		}
+		Collections.sort(rst,(a,b)->-1*a.compareTo(b));
+		return rst;
 	}
 	
 	/**
@@ -228,9 +235,8 @@ public abstract class Graph {
 
 	
 	public static void main (String[] args) {
-		GraphLoader.createIntersectionsFile("data/maps/myucsd.map", "data/intersections/myucsd.intersections");
-		
-
+		GraphLoader.createIntersectionsFile("data/maps/part_ucsd.map", "data/intersections/part_ucsd.intersections");
+		GraphLoader.createIntersectionsFile("data/testdata/simpletest.map", "data/intersections/simpletest.intersections");
 		// For testing of Part 1 functionality
 		// Add your tests here to make sure your degreeSequence method is returning
 		// the correct list, after examining the graphs.
